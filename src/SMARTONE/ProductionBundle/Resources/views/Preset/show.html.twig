@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Preset</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Badge</th>
+                <td>{{ entity.badge }}</td>
+            </tr>
+            <tr>
+                <th>Feet</th>
+                <td>{{ entity.feet }}</td>
+            </tr>
+            <tr>
+                <th>Bedaction</th>
+                <td>{{ entity.bedAction }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ entity.comment }}</td>
+            </tr>
+            <tr>
+                <th>Endbar</th>
+                <td>{{ entity.endBar }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('preset') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('preset_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

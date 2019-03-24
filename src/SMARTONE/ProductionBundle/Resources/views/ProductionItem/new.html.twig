@@ -1,0 +1,217 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'SMARTONEProductionBundle:ProductionItem:form/form_layout.html.twig' %}
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="pull-right" style="margin-top: -10px; margin-right: -20px;">
+                            {% if delete_form is defined %}
+                                {{ form(delete_form) }}
+                            {% endif %}
+                        </div>
+                        <h2>Production / Add</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    {#{{ form_start(form) }}#}
+                    {#<div class="box-body" style="padding-bottom: 40px;">#}
+                    {#{{ form_row(form.qty) }}#}
+                    {#{{ form_row(form.mattress) }}#}
+                    {#{{ form_row(form.base) }}#}
+                    {#{{ form_row(form.headboard) }}#}
+                    {#{{ form_row(form.bedStead) }}#}
+                    {#{{ form_row(form.bedAction) }}#}
+                    {#{{ form_row(form.mattressCover) }}#}
+                    {#</div>#}
+                    {#<div class="dker p-a text-right">#}
+                    {#<a href="{{ path('productionitem') }}" class="btn btn-default">Back</a>#}
+                    {#{{ form_widget(form.submit) }}#}
+                    {#</div>#}
+                    {#{{ form_end(form) }}#}
+
+
+                    <div class="box-body">
+                            <div class="row" style=" background-color: #eaeaea;">
+                            <div class="col-md-9" style="border-right: 1px solid #9e9e9e;">
+
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-md-3" style="border-right: 1px solid #9e9e9e;">
+                                        <a class="btn btn-info btn-xs p-x-md" data-toggle="modal" data-target="#m">Add Set<br>+ Headboard</a>
+                                        <a class="btn btn-info btn-xs p-x-md" data-toggle="modal" data-target="#m">Add Set<br>Base + Matt Only</a>
+                                    </div>
+                                    <div class="col-md-9 text-right">
+                                    {#<a class="btn btn-info">Add<br>Set</a>#}
+
+                                    <a class="btn blue btn-xs p-x-md" data-toggle="modal" data-target="#m">Add<br>Base</a>
+                                    <a class="btn blue btn-xs p-x-md">Add<br>Mattress</a>
+                                    <a class="btn blue btn-xs p-x-md">Add<br>Headboard</a>
+                                    <a class="btn blue btn-xs p-x-md">Mattress<br>Cover</a>
+                                    <a class="btn blue btn-xs p-x-md">Add<br>Bedstead<br></a>
+                                    <a class="btn blue btn-xs p-x-md">Add Bed<br>Action<br></a>
+                                    <a class="btn blue btn-xs p-x-md">Add<br>Accessory<br></a>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 10px;">
+                                    <table class="table table-condensed" style="background-color: #ffffff;">
+                                        <thead>
+                                        <tr>
+                                            <th width="20%" align="left"># Item No.</th>
+                                            <th>Item Type</th>
+                                            <th>c</th>
+                                            <th>d</th>
+                                            <th>e</th>
+                                        </tr>
+                                        </thead>
+                                        <tr>
+                                            <td align="left">1234-12</td>
+                                            <td>base</td>
+                                            <td>c</td>
+                                            <td>d</td>
+                                            <td>e</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">1234-12</td>
+                                            <td>base</td>
+                                            <td>c</td>
+                                            <td>d</td>
+                                            <td>e</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="box-body">
+                                    <h4>Selected Items</h4>
+                                </div>
+                                <a class="btn btn-success btn-block">Place Sale</a>
+                            </div>
+                            </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {#{% for child in form.children %}#}
+    {#{% if form.children|length / 2 <= loop.index0 %}#}
+    {#{{ form_row(child) }}#}
+    {#{% else %}#}
+    {#{{ form_row(child) }}#}
+    {#{% endif %}#}
+    {#{% endfor %}#}
+
+    <div id="m" class="modal fade in" data-backdrop="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title">Add Base</h5>
+                </div>
+                {{ form_start(form) }}
+                <div class="modal-body p-lg">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="b-b nav-active-bg">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="" data-toggle="tab" data-target="#tab1" aria-expanded="true">Bases</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab2" aria-expanded="false">Mattress</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content p-a m-b-md">
+                                <div class="tab-pane animated fadeIn text-muted active" id="tab1" aria-expanded="true">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ form_row(form.baseCategory) }}
+                                            {{ form_row(form.base) }}
+                                            {{ form_row(form.baseWidth) }}
+                                            {{ form_row(form.baseLength) }}
+                                            {{ form_row(form.baseDepth) }}
+                                            {{ form_row(form.baseConfig) }}
+                                            {{ form_row(form.noDrawers) }}
+                                            {{ form_row(form.drawerConfig) }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ form_row(form.fabricColour) }}
+                                            {{ form_row(form.badge) }}
+                                            {{ form_row(form.feet) }}
+                                            {{ form_row(form.bedAction) }}
+                                            {{ form_row(form.splitBedAction) }}
+                                            {{ form_row(form.handset) }}
+                                            {{ form_row(form.comment) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane animated fadeIn text-muted" id="tab2" aria-expanded="false">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ form_row(form.headboard) }}
+                                            {{ form_row(form.bedStead) }}
+                                            {{ form_row(form.mattressCover) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</a>
+                    <button type="submit" class="btn btn-success p-x-md">Add Set</button>
+                </div>
+                {{ form_end(form) }}
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+        {% block javascripts %}
+        {{ parent() }}
+        <script>
+        $(function() {
+var $sport = $('#smartone_productionbundle_productionitem_baseCategory');
+// When sport gets selected ...
+$sport.change(function() {
+    $('#smartone_productionbundle_productionitem_base').attr('disabled','disabled');
+    $('#smartone_productionbundle_productionitem_baseWidth').attr('disabled','disabled');
+
+  // ... retrieve the corresponding form.
+  var $form = $(this).closest('form');
+  // Simulate form data, but only include the selected sport value.
+  var data = {};
+  data[$sport.attr('name')] = $sport.val();
+  // Submit data via AJAX to the form's action path.
+  $.ajax({
+    url : $form.attr('action'),
+    type: $form.attr('method'),
+    data : data,
+    success: function(html) {
+      // Replace current position field ...
+      $('#smartone_productionbundle_productionitem_base').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#smartone_productionbundle_productionitem_base')
+      ).attr('disabled');
+
+       $('#smartone_productionbundle_productionitem_baseWidth').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#smartone_productionbundle_productionitem_baseWidth')
+      ).attr('disabled');
+      // Position field now displays the appropriate positions.
+    }
+  });
+});
+});
+</script>
+        {% endblock %}

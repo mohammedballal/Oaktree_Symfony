@@ -1,0 +1,64 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Order</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Orderno</th>
+                <td>{{ entity.orderNo|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Orderreceivedate</th>
+                <td>{{ entity.orderReceiveDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Orderstatus</th>
+                <td>{{ entity.orderStatus }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ entity.comments }}</td>
+            </tr>
+            <tr>
+                <th>Cancelcomment</th>
+                <td>{{ entity.cancelComment }}</td>
+            </tr>
+            <tr>
+                <th>Deliveryaddress</th>
+                <td>{{ entity.deliveryAddress }}</td>
+            </tr>
+            <tr>
+                <th>Deliveryscheduledate</th>
+                <td>{{ entity.deliveryScheduleDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Deliveryscheduleday</th>
+                <td>{{ entity.deliveryScheduleDay|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Bookingreference</th>
+                <td>{{ entity.bookingRef|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('order') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('order_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

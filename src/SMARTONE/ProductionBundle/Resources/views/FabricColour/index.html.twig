@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Fabric Colour list</h2>
+                </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Colour Name</th>
+                <th>Colour Category</th>
+                <th>Fabric For</th>
+                <th>Sort Order</th>
+                <th style="text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set cat = null %}
+        {% for entity in entities %}
+            {% if cat != entity.colourCategory %}
+            <tr>
+                <td colspan="5" style="color: #ffffff; background-color: grey; font-size: 20px; font-weight: bold;">{{ entity.colourCategory }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>{{ entity.colourName }}</td>
+                <td>{{ entity.colourCategory }}</td>
+                <td>{{ entity.fabricFor }}</td>
+                <td>{{ entity.sortOrder }}</td>
+                <td align="right"><a class="btn btn-info btn-xs" href="{{ path('fabriccolour_edit', { 'id': entity.id }) }}">Edit</a></td>
+            </tr>
+            {% set cat = entity.colourCategory %}
+        {% endfor %}
+        </tbody>
+    </table>
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('fabriccolour_new') }}">
+                        New Fabric Colour
+                    </a>
+                </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% block stylesheets %}
+
+        <!-- style -->
+        <link rel="stylesheet" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/animate.css/animate.min.css') }}"
+              type="text/css"/>
+        <link rel="stylesheet" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/font-awesome/css/font-awesome.min.css') }}"
+              type="text/css"/>
+        <link rel="stylesheet"
+              href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/material-design-icons/material-design-icons.css') }}"
+              type="text/css"/>
+        <link rel="stylesheet" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/bootstrap/dist/css/bootstrap.min.css') }}"
+              type="text/css"/>
+        <!-- build:css ../assets/styles/app.min.css -->
+        <link rel="stylesheet" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/styles/app.css') }}" type="text/css"/>
+        <!-- endbuild -->
+        <link rel="stylesheet" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/styles/font.css') }}" type="text/css"/>
+
+        <link rel="stylesheet" type="text/css" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.dark.css') }}">
+
+    {% endblock %}
+    <link rel="shortcut icon" sizes="196x196" href="{{ app.request.scheme ~'://'~ app.request.httpHost ~ asset('bundles/unltdhome/assets/images/logo.png') }}">
+</head>
+<body class="  pace-done">
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99"
+         style="-webkit-transform: translate3d(100%, 0px, 0px);">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div>
+<div class="app" id="app">
+
+    <!-- ############ LAYOUT START-->
+
+    <!-- aside -->
+
+    <!-- / aside -->
+
+    <!-- content -->
+    {% block body %}{% endblock %}
+    <!-- / -->
+
+
+    <!-- ############ LAYOUT END-->
+
+</div>
+</body>
+
+
+
+{% block javascripts %}
+    <!-- jQuery -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js'></script>
+{% endblock %}
+</body>
+</html>

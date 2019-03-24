@@ -1,0 +1,88 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Sale</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Saleorderno</th>
+                <td>{{ entity.saleOrderNo }}</td>
+            </tr>
+            <tr>
+                <th>Customername</th>
+                <td>{{ entity.customer }}</td>
+            </tr>
+            <tr>
+                <th>Inproduction</th>
+                <td>{{ entity.inProduction }}</td>
+            </tr>
+            <tr>
+                <th>Inproductiondate</th>
+                <td>{{ entity.inProductionDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Productioncomplete</th>
+                <td>{{ entity.productionComplete }}</td>
+            </tr>
+            <tr>
+                <th>Productioncompletedate</th>
+                <td>{{ entity.productionCompleteDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Salespaperworkcomplete</th>
+                <td>{{ entity.salesPaperworkComplete }}</td>
+            </tr>
+            <tr>
+                <th>Salespaperworkcompletedate</th>
+                <td>{{ entity.salesPaperworkCompleteDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Vehicleassigned</th>
+                <td>{{ entity.vehicleAssigned }}</td>
+            </tr>
+            <tr>
+                <th>Vehicleassigneddate</th>
+                <td>{{ entity.vehicleAssignedDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Vehicleregno</th>
+                <td>{{ entity.vehicleRegNo }}</td>
+            </tr>
+            <tr>
+                <th>Loaded</th>
+                <td>{{ entity.loaded }}</td>
+            </tr>
+            <tr>
+                <th>Loadeddate</th>
+                <td>{{ entity.loadedDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sale') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('sale_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

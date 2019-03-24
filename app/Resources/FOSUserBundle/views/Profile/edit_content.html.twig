@@ -1,0 +1,12 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit p-a-md col-md-6">
+    {{ form_widget(form) }}
+    <div>
+        <input class="btn btn-success" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+</form>
+
+

@@ -1,0 +1,374 @@
+{% extends full ? "full.html.twig" : '::base.html.twig' %}
+
+{% block body -%}
+
+    <style>
+        th {
+            vertical-align: top !important;
+            background-color: #9E9E9E;
+            color: #ffffff;
+            border-right: 3px solid #ffffff;
+            text-align: center !important;
+            font-size: 14px;
+        }
+        td {
+           vertical-align: middle !important;
+           text-align: center;
+        }
+        .lb-red {
+           background-color: #FF0000;
+           padding: 3px;
+           color: #ffffff;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .large {
+            font-size: 20px;
+        }
+        .padding-10 {
+            padding: 10px;
+        }
+        .to-be-completed {
+            font-size: 12px;
+        }
+        .btn-lg {
+            font-size: 14px;
+        }
+    </style>
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <span style="font-size: 20px;">
+                    In production : <strong style="background-color: #ffcaba; padding: 3px;">{{ inPro }}</strong><br>
+                    Not in production : <strong style="background-color: #ffcaba; padding: 3px;">{{ notInPro }}</strong>
+                </span>
+            </div>
+
+            {% if app.session.flashbag.peekAll|length > 0  %}
+                <div class="col-md-12">
+                    <div class="box">
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="alert bg-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-md-12">
+                <div class="box">
+
+                    {#<div class="box-header">#}
+                        {#<h2>Production Management</h2>#}
+                    {#</div>#}
+
+                    <table class="table table-striped table-condensed" id="saleTable">
+                        <thead class='header'>
+                        <tr>
+                            <th></th>
+                            <th>{{ _self.info(infos,1) }}</th>
+                            <th>{{ _self.info(infos,2) }}</th>
+                            <th>{{ _self.info(infos,3) }}</th>
+                            <th>{{ _self.info(infos,4) }}</th>
+                            <th>{{ _self.info(infos,5) }}</th>
+                            <th>{{ _self.info(infos,10) }}</th>
+                            <th>{{ _self.info(infos,6) }}</th>
+                            <th>{{ _self.info(infos,7) }}</th>
+                            <th>{{ _self.info(infos,8) }}</th>
+                            <th>{{ _self.info(infos,9) }}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Sales<br>Order No </th>
+                            <th>Customer<br>Name</th>
+                            <th>In<br>Production</th>
+                            <th>To Be<br>Completed By</th>
+                            <th>Production<br>Complete</th>
+                            <th>Delivery /<br>Collection Day</th>
+                            <th>Sales<br>Paperwork</th>
+
+
+                            <th>Vehicle<br>Assigned</th>
+
+                            {#<th>Vehicleregno</th>#}
+                            <th>Loaded</th>
+
+                            <th>Mark As<br>Complete</th>
+                            {#<th>Created At</th>#}
+                            {#<th>Actions</th>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% set qType = {
+                            1   : 'Sales Order No',
+                            2   : 'Customer Name',
+                            3   : 'In Production',
+                            4   : 'To Be Completed By',
+                            5   : 'Production Complete',
+                            6   : 'Sales Paperwork',
+                            7   : 'Vehicle Assigned',
+                            8   : 'Loaded',
+                            9   : 'Mark As Complete',
+                            10  : 'Delivery Day',
+                            11  : 'Other'
+                        }
+                        %}
+
+                        {% for entity in entities %}
+                            <tr>
+                                <td><div class="dropdown">
+                                        <button type="button" class="btn btn-xs btn-info" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-question"></i> </button>
+                                        <ul class="dropdown-menu">
+                                            {% for key,type in qType %}
+                                            <a class="dropdown-item modal-click" data-target-path="{{ path('sale_question_add', {'id' : entity.id,'type' : key}) }}" data-toggle="modal" data-target="#editModal">{{ type }}</a>
+                                            {% endfor %}
+                                        </ul>
+                                    </div></td>
+                                <td><span class="bold large {% if not entity.productionComplete and entity.productionCompleteByDate is not null %}{{ entity.productionCompleteByDate|late }}{% endif %}">{{ entity.saleOrderNo }}</span><br>
+                                    {% if entity.createdAt %}{{ entity.createdAt|date('D d/m/Y H:i') }}{% endif %}</td>
+                                <td><span class="bold large">{{ entity.customer }}</span></td>
+
+                                <td>
+                                    <div class="dropdown inline btn-block">
+                                       {% if not entity.inProduction %}
+                                           <a class="btn btn-danger btn-lg btn-block" data-toggle="dropdown" aria-expanded="false">No</a>
+                                       {% else %}
+                                           {% if entity.fullProduction %}
+                                           <a class="btn btn-success btn-lg btn-block" data-toggle="dropdown" aria-expanded="false">
+                                               Full
+                                               <div style="font-size: 10px;">{{ entity.inProductionDate|date("D d/m/Y") }}<br>{{ entity.inProductionDate|date("H:i") }}</div>
+                                           </a>
+                                           {% else %}
+                                               <a class="btn btn-warning btn-lg btn-block" data-toggle="dropdown" aria-expanded="false">Part
+                                                   <div style="font-size: 10px;">{{ entity.inProductionDate|date("D d/m/Y H:i") }}</div>
+                                               </a>
+                                           {% endif %}
+
+                                       {% endif %}
+
+
+                                        <div class="dropdown-menu pull-right text-center padding-10">
+                                            <a class="btn btn-warning btn-block modal-click" data-target-path="{{ path('sale_in_part', {'id' : entity.id}) }}" data-toggle="modal" data-target="#editModal">Part</a>
+                                            <a class="btn btn-success btn-block modal-click" data-target-path="{{ path('sale_in', {'id' : entity.id}) }}" data-toggle="modal" data-target="#editModal">Full</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- To be completed -->
+                                <td>
+                                    {% if entity.productionCompleteByDate is not null %}
+                                    <a class="btn {% if entity.productionComplete %}btn-success{% else %}btn-{{ entity.productionCompleteByDate|completeBy }}{% endif %} btn-lg btn-block to-be-completed">
+                                        {{ entity.productionCompleteByDate|date('l') }}<br>{{ entity.productionCompleteByDate|date('D d/m/Y') }}
+                                    </a>
+                                        {% else %}
+                                            <a class="btn btn-default btn-lg btn-block to-be-completed">
+                                        Not In Production
+                                    </a>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Production Complete -->
+                                <td>
+                                    {% set d = entity.productionCompleteDate|date('D d/m/Y') ~'<br>'~entity.productionCompleteDate|date('H:i') %}
+                                    {{ _self.btn('success','danger',entity.productionComplete,entity.inProduction,d,path('sale_prod', {'id' : entity.id})) }}
+                                </td>
+
+                                <!-- Delivery Day -->
+                                <td>
+                                    {% set d = '<span style="font-size: 16px;">'~entity.deliveryDayDate|date('l') ~'</span><br>'~ entity.deliveryDayDate|date('d/m/Y') %}
+                                    {{ _self.btn('info','default',entity.deliveryDay,true,d,path('delivery_day', {'id' : entity.id})) }}
+                                </td>
+
+                                <!-- Paperwork -->
+                                <td>
+                                    {% set d = entity.salesPaperworkCompleteDate|date('D d/m/Y') ~'<br>'~ entity.salesPaperworkCompleteDate|date('H:i') %}
+                                    {{ _self.btn('success','danger',entity.salesPaperworkComplete,true,d,path('sale_paperwork', {'id' : entity.id})) }}
+                                </td>
+
+                                <!-- Vehicle Assigned -->
+                                <td>
+                                    {% set d = entity.vehicleAssignedDate|date('D d/m/Y') ~'<br>'~ entity.vehicleAssignedDate|date('H:i') %}
+                                    {{ _self.btn2('success','default',entity.vehicleAssigned,true,d,path('sale_vehicle', {'id' : entity.id}),[entity.vehicle]) }}
+                                </td>
+
+                                <!-- Loaded -->
+                                <td>
+                                    {% set d = entity.loadedDate|date('D d/m/Y') ~'<br>'~ entity.loadedDate|date('H:i') %}
+                                    {{ _self.btn('success','danger',entity.loaded,entity.vehicleAssigned,d,path('sale_load', {'id' : entity.id})) }}
+                                </td>
+
+                                <!-- Mark As Completed -->
+                                <td>
+                                    {% if entity.loaded %}
+                                    <a data-target-path="{{ path('sale_complete',{'id' : entity.id}) }}" data-toggle="modal" data-target="#editModal" class="btn {% if not entity.complete %}btn-outline{% endif %} btn-md btn-success-outline modal-click"><i class="fa fa-check"></i> Complete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if entity.saleQuestion|length > 0 %}
+                            <tr>
+                                <td colspan="11" style="text-align: left;">
+                                    {% for saleQ in entity.saleQuestion %}
+                                        <a data-target-path="{{ path('answer_question', {'id' : saleQ.id}) }}" data-toggle="modal" data-target="#editModal" class="modal-click text-left label {% if not saleQ.complete %}yellow{% else %}green{% endif %}">
+                                            {{ saleQ.question.typeText }}<br>
+                                            {% if not saleQ.complete %}
+                                            Pending: {{ saleQ.question.text }}
+                                            {% else %}
+                                                Complete: <span class="red">{{ saleQ.question.text }}</span> | {{ saleQ.answer }}
+                                            {% endif %}
+                                            {#<a href="{{ path('sale_question_delete', {'id' : saleQ.id}) }}"><i class="fa fa-times red"></i></a>#}
+                                        </a>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        {% if full %}
+                            <a ui-sref="app.widget" class="btn btn-default" href="{{ path('sale') }}">
+                                <i class="material-icons md-24"></i>
+                            </a>
+                        {% else %}
+                            <a ui-sref="app.widget" class="btn btn-default" href="{{ path('sale', {'type' : 'full'}) }}">
+                                <i class="material-icons md-24"></i>
+                            </a>
+                        {% endif %}
+                        <a ui-sref="app.widget" class="btn btn-default" href="{{ path('sale') }}">
+                            Sales
+                        </a>
+                        <a ui-sref="app.widget" class="btn btn-default" href="{{ path('complete_sales') }}">
+                            Completed Sales
+                        </a>
+                        <a ui-sref="app.widget" class="btn info" href="{{ path('sale_new') }}">
+                            New Order
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="editModal" class="modal fade in" data-backdrop="true" style="display: none;">
+        <div id="main-body" class="modal-dialog">
+
+        </div>
+    </div>
+
+
+    {% macro btn(colour,colour2,status,allow,date,path = null, others = []) %}
+        <div class="dropdown inline btn-block">
+            <a class="btn btn-{% if status %}{{ colour }}{% else %}{{ colour2 }}{% endif %} btn-lg btn-block" data-toggle="dropdown" aria-expanded="false">
+                {% if status %}
+                {% if colour2 == 'default' %}
+                    {% else %}
+                        Yes
+                {% endif %}
+                    <div style="font-size: 10px;">{{ date|raw }}{% if others %}<br>{% for other in others %}{{ other }}{% endfor %}{% endif %}</div>
+                {% else %}
+                {% if colour2 == 'default' %}Select Day{% else %}No{% endif %}
+                {% endif %}
+            </a>
+            {% if not status and allow %}
+            <div class="dropdown-menu pull-right text-center padding-10">
+                <a class="btn btn-success btn-block modal-click" data-target-path="{{ path }}" data-toggle="modal" data-target="#editModal">Yes</a>
+            </div>
+            {% endif %}
+
+            {% if colour2 == 'default' and allow %}
+                <div class="dropdown-menu pull-right text-center padding-10">
+                    <a class="btn btn-success btn-block modal-click" data-target-path="{{ path }}" data-toggle="modal" data-target="#editModal">Yes</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endmacro %}
+
+    {% macro btn2(colour,colour2,status,allow,date,path = null, others = []) %}
+        <div class="dropdown inline btn-block">
+            <a class="btn btn-{% if status %}{{ colour }}{% else %}{{ colour2 }}{% endif %} btn-lg btn-block" data-toggle="dropdown" aria-expanded="false">
+                {% if status %}
+                    {% if colour2 == 'default' %}
+                    {% else %}
+                        Yes
+                    {% endif %}
+                    <div style="font-size: 10px;">{{ date|raw }}{% if others %}<br>{% for other in others %}{{ other }}{% endfor %}{% endif %}</div>
+                {% else %}
+                    {% if colour2 == 'default' %}Select Vehicle{% else %}No{% endif %}
+                {% endif %}
+            </a>
+            {% if not status and allow %}
+                <div class="dropdown-menu pull-right text-center padding-10">
+                    <a class="btn btn-success btn-block modal-click" data-target-path="{{ path }}" data-toggle="modal" data-target="#editModal">Yes</a>
+                </div>
+            {% endif %}
+
+            {% if colour2 == 'default' and allow %}
+                <div class="dropdown-menu pull-right text-center padding-10">
+                    <a class="btn btn-success btn-block modal-click" data-target-path="{{ path }}" data-toggle="modal" data-target="#editModal">Yes</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endmacro %}
+
+
+    {% macro info(infos,number) %}
+
+        {% set l = null %}
+        {% for i in infos %}
+            {% if i.number == number %}{% set l = i %}{% endif %}
+        {% endfor %}
+
+        {% if l %}
+        <a class="btn btn-xs btn-info" data-toggle="modal" data-target="#m-a-f-{{ number }}">
+            <i class="material-icons md-24"></i>
+        </a>
+
+
+        <div id="m-a-f-{{ number }}" class="modal fade in" data-backdrop="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ l.numberText }}</h5>
+                    </div>
+                    <div class="modal-body text-left">
+                        <p>{{ l.text|raw }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div>
+        </div>
+        {% endif %}
+    {% endmacro %}
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <link href="{{ asset('assets/table-headers/table-fixed-header.css') }}">
+    <script src="{{ asset('assets/table-headers/table-fixed-header.js') }}"></script>
+    <script>
+        $(function() {
+            $('.modal-click').click(function () {
+                $('#main-body').html(` <div class="modal-content"><div class="modal-header"><h5 class="modal-title text-center"><i class="fa fa-spin fa-spinner"></i> </h5></div></div>`);
+                $.get( $(this).attr('data-target-path'), function( data ) {
+                    $( "#main-body" ).html( data );
+                });
+            })
+        });
+        $(document).ready(function(){
+            $('#saleTable').fixedHeader();
+        });
+    </script>
+{% endblock %}

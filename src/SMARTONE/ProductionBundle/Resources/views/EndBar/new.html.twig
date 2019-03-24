@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Endbar / Add</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    <div class="box-body">
+                    {{ form(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('endbar') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

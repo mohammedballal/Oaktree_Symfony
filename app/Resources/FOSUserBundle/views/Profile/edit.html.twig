@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {{ parent() }} My Profile
+{% endblock %}
+{% block body %}
+    <div class="row-col">
+        <div class="col-sm-3 col-lg-2">
+            <div class="p-y">
+                <div class="nav-active-border left b-primary">
+                    <ul class="nav nav-sm">
+                        <li class="nav-item">
+                            <a class="nav-link block active" href="{{ path('fos_user_profile_edit') }}">Change Username</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link block" href="{{ path('fos_user_change_password') }}">Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-lg-10 light lt bg-auto">
+            <div class="tab-content pos-rlt">
+                <div class="tab-pane active" id="tab-1" aria-expanded="true">
+                    <div class="p-a-md dker _600">My Profile</div>
+                    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

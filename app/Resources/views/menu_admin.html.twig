@@ -1,0 +1,62 @@
+<div id="aside" class="app-aside modal fade folded md nav-expand">
+    <div class="left navside green-800 dk" layout="column" style="color:#FFFFFF;">
+        <div class="navbar navbar-md no-radius">
+            <!-- brand -->
+            <a class="navbar-brand">
+                <img src="{{ asset('images/bodyease.png') }}" alt="." class="">
+                <span class="hidden-folded inline" style="color: #ffffff !important; font-family: fatFrank;">Bodyease</span>
+            </a>
+            <!-- / brand -->
+        </div>
+        <div flex="" class="hide-scroll">
+            <nav class="scroll nav-active-dark">
+                {#<ul class="nav" ui-nav="">#}
+                    {#<li ui-sref-active="active">#}
+                        {#<a href="{{ path('dashboard') }}"><span class="nav-icon"><i class="material-icons">#}
+                                    {#<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">#}
+                                        {#<path d="M24,20c-7.72,0-14,6.28-14,14h4c0-5.51,4.49-10,10-10s10,4.49,10,10h4C38,26.28,31.721,20,24,20z" fill="#6cc788"></path>#}
+                                    {#</svg>#}
+                                {#</i>#}
+                            {#</span>#}
+                            {#<span class="nav-text">Dashboard</span>#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#</li>#}
+                    {#&#123;&#35;<li ui-sref-active="active"><a ui-sref="app.widget" href="{{ path('user') }}"><span class="nav-icon"><i class="fa fa-users"></i></span><span class="nav-text">Resellers</span></a></li>&#35;&#125;#}
+
+                    {#&#123;&#35;<li ui-sref-active="active"><a ui-sref="app.widget" href="{{ path('application') }}"><span class="nav-icon"><i class="fa fa-tasks"></i></span><span class="nav-text">Applications</span></a></li>&#35;&#125;#}
+{#&#123;&#35;&#35;&#125;#}
+                    {#&#123;&#35;<li ui-sref-active="active"><a ui-sref="app.widget" href="{{ path('news') }}"><span class="nav-icon"><i class="fa fa-newspaper-o"></i></span><span class="nav-text">News</span></a></li>&#35;&#125;#}
+
+                    {#<li class="nav-header hidden-folded">#}
+                        {#<small class="text-muted">Useful Documents</small>#}
+                    {#</li>#}
+                {#</ul>#}
+
+                {{ knp_menu_render('SMARTONEUserBundle:Builder:mainMenu',{'allow_safe_labels': true, 'currentClass': 'active', 'branch_class' : 'sidenav-item has-subnav', 'ancestorClass' : 'active' }) }}
+            </nav>
+        </div>
+        <div flex-no-shrink="">
+            <nav ui-nav="">
+                <ul class="nav">
+
+
+
+                    <li>
+                        <div class="b-b b m-t-sm"></div>
+                    </li>
+                    <li class="">        <a href="{{ path('all_order') }}" class="block-list__link"><span class="nav-icon"><i class="fa fa-clock-o"></i></span><span class="nav-text">All Orders</span></a>
+                    </li>
+                    <li class="no-bg">
+                        <a href="{{ path('fos_user_security_logout') }}">
+        <span class="nav-icon">
+      	 <i class="material-icons"></i>
+        </span>
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Bodyease Portal</title>
+    <meta name="description" content="Platinum Enterprise" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+    <link rel="apple-touch-icon" href="{{ asset('images/pl-logo.png') }}">
+    <meta name="apple-mobile-web-app-title" content="Flatkit">
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="196x196" href="{{ asset('images/oaktree.png') }}">
+
+    <!-- style -->
+    <link rel="stylesheet" href="{{ asset('assets/animate.css/animate.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/material-design-icons/material-design-icons.css') }}" type="text/css" />
+
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" />
+    <!-- build:css ../assets/styles/app.min.css -->
+    <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="{{ asset('assets/styles/font.css') }}" type="text/css" />
+</head>
+
+
+
+
+{% block body %}
+
+<body style="background-color: green;">
+<div class="app" id="app">
+
+    <!-- ############ LAYOUT START-->
+    <div class="center-block w-xxl w-auto-xs p-y-md">
+        <div class="navbar">
+            <div class="text-center" style="background-color: white;">
+                <img src="{{ asset('images/oaktree.png') }}" height="65"><br>
+                <img src="{{ asset('images/middleton.png') }}" height="30">
+            </div>
+        </div>
+
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div class="p-a-md box-color text-center r box-shadow-z1 text-color m-a">
+        <h6>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h6>
+        <br>
+            <a class="btn btn-info form-control" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} <i class="fa fa-sign-out"></i></a>
+            <br><br>
+            <a class="btn btn-success form-control" href="{{ path('dashboard') }}">Continue to Dashboard <i class="fa fa-arrow-right"></i> </a>
+            </div>
+    {% else %}
+
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+
+        {% endif %}
+
+    </div>
+    
+    <div class="text-center">
+        <img src="{{ asset('images/bodyease.png') }}" height="200"><br>
+
+        Savile Business Centre<br>
+        Mill Street East<br>
+        Dewsbury<br>
+        WF12 9AH<br>
+        United Kindgom<br><br>
+        sales@bodyease.co.uk
+    </div>
+
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+    <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
+    <script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js') }}"></script>
+    <!-- core -->
+    <script src="{{ asset('libs/jquery/underscore/underscore-min.js') }}"></script>
+    <script src="{{ asset('libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js') }}"></script>
+    <script src="{{ asset('libs/jquery/PACE/pace.min.js') }}"></script>
+
+    <script src="{{ asset('scripts/config.lazyload.js') }}"></script>
+
+    <script src="{{ asset('scripts/palette.js') }}"></script>
+    <script src="{{ asset('scripts/ui-load.js') }}"></script>
+    <script src="{{ asset('scripts/ui-jp.js') }}"></script>
+    <script src="{{ asset('scripts/ui-include.js') }}"></script>
+    <script src="{{ asset('scripts/ui-device.js') }}"></script>
+    <script src="{{ asset('scripts/ui-form.js') }}"></script>
+    <script src="{{ asset('scripts/ui-nav.js') }}"></script>
+    <script src="{{ asset('scripts/ui-screenfull.js') }}"></script>
+    <script src="{{ asset('scripts/ui-scroll-to.js') }}"></script>
+    <script src="{{ asset('scripts/ui-toggle-class.js') }}"></script>
+
+    <script src="{{ asset('scripts/app.js') }}"></script>
+
+    <!-- ajax -->
+    <script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>
+    <script src="{{ asset('scripts/ajax.js') }}"></script>
+    <!-- endbuild -->
+</body>
+</html>
+
+{% endblock %}
+

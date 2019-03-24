@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="padding">
+        <div class="margin">
+            <h5 class="m-b-0 _300">Hi {{ app.user }}, Welcome back</h5>
+            <small class="text-muted">Bodyease Portal</small>
+        </div>
+
+        {% for entity in entities %}
+        <div class="col-md-12 text-center" style="background-color: white; margin-bottom: 20px;">
+            {{ entity.news|nl2br }}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

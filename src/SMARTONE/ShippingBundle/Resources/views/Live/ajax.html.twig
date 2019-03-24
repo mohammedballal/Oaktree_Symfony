@@ -1,0 +1,80 @@
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>{{ title }}</h2>
+                    </div>
+
+                    <div class="text-center" style="background-color: #ff0000; color: #ffffff; font-size: 30px;">
+                        <strong>ERRORS IN LOADING</strong><br>
+                        <span style="background-color: #ffffff; color: #ff0000; padding: 10px; font-size: 30px !important; border-radius: 5px;">{{ entities|totals['errors'] }}</span>
+                    </div>
+
+                    <table class="records_list table table-striped">
+                        <tbody>
+                        <tr class="header-tr">
+                            <td align="center" colspan="2" style="font-size: 30px;">Total</td>
+                            <td class="inner-td amber" align="center">{{ entities|totals['packages'] }}</td>
+                            <td class="inner-td loaded" align="center ">{{ entities|totals['loaded'] }}</td>
+                            <td class="inner-td outstanding" align="center">{{ entities|totals['outstanding'] }}</td>
+                            {% for size in sizes %}
+                                <td align="center">
+                                    <table>
+                                        <tr>
+                                            <td class="inner-td text-center amber">{{ entities|totalsBySize(size)['packages'] }}</td>
+                                            <td class="inner-td text-center loaded">{{ entities|totalsBySize(size)['loaded'] }}</td>
+                                            <td class="inner-td text-center outstanding">{{ entities|totalsBySize(size)['outstanding'] }}</td>
+                                            {% if entities|totalsBySize(size)['errors'] > 0 %}
+                                            <td class="inner-td text-center error">{{ entities|totalsBySize(size)['errors'] }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    </table>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        </tbody>
+                        <tr>
+                            <th>Doc No</th>
+                            <th>Courier</th>
+                            <th class="text-center">Packages</th>
+                            <th class="text-center">Loaded</th>
+                            <th class="text-center">Outstanding</th>
+                            {% for size in sizes %}
+                                <th class="text-center">{{ size }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tbody>
+
+
+                        {% for entity in entities %}
+                            <tr>
+                                <td style="font-size: 16px;"><a href="{{ path('shipment_show', { 'id': entity.id }) }}">{{ entity.docNo }}</a></td>
+                                <td align="center" style="background-color: #{{ entity.courier.color }}; border-bottom: 1px solid #ffffff;"><img height="50" src="/{{ entity.courier.webPath }}"></td>
+                                <td class="amber" align="center">{{ entity.barcodes|length }}</td>
+                                <td class="loaded" align="center ">{{ entity|loaded }}</td>
+                                <td class="outstanding" align="center">{{ entity.barcodes|length - entity|loaded }}</td>
+                                {% for size in sizes %}
+                                    <td align="center">
+                                    <table>
+                                        <tr>
+                                            <td class="inner-td text-center amber">{{ entity.barcodes|scannedBySize(size) }}</td>
+                                            <td class="inner-td text-center loaded">{{ entity.barcodes|loadedBySize(size) }}</td>
+                                            <td class="inner-td text-center outstanding">{{ entity.barcodes|outstandingBySize(size) }}</td>
+                                            {% if entity.barcodes|errorBySize(size) > 0 %}
+                                            <td class="inner-td text-center error">{{ entity.barcodes|errorBySize(size) }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    </table>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>

@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Users</h2>
+                    </div>
+
+                    <table class="records_list table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="text-align: left;">Name</th>
+                            <th style="text-align: left;">Username</th>
+                            <th style="text-align: right;">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.username }}</td>
+                                <td align="right">
+                                    <a class="btn btn-info btn-xs" href="{{ path('user_edit', { 'id': entity.id }) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn info" href="{{ path('user_new') }}">
+                            New User
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

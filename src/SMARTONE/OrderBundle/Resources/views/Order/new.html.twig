@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Order / Add</h2>
+                        <div class="pull-right">
+                            {% if delete_form is defined %}
+                                {{ form(delete_form) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    <div class="box-body">
+                    {{ form(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('order') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

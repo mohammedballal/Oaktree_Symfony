@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+
+            {% if app.session.flashbag.peekAll|length > 0  %}
+                <div class="col-md-12">
+                    <div class="box">
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="alert bg-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Customer list</h2>
+                    </div>
+
+                    <table class="records_list table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="text-align: left;">Number</th>
+                            <th style="text-align: left;">Customer Name</th>
+                            <th style="text-align: right;">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>{{ entity.sortOrder }}</td>
+                                <td>{{ entity.name }}</td>
+                                <td align="right">
+                                    <a class="btn btn-info btn-xs" href="{{ path('customer_edit', { 'id': entity.id }) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn info" href="{{ path('customer_new') }}">
+                            New Customer
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

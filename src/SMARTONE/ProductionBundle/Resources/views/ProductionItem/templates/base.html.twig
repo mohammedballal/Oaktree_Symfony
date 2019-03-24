@@ -1,0 +1,87 @@
+{% macro base_headers() %}
+    <tr class="thead">
+        <td>Qty</td>
+        <td>Size Width</td>
+        <td></td>
+        <td>Size Length</td>
+        <td>Base</td>
+        <td>Base Config</td>
+        <td>Base Upgrade</td>
+        <td></td>
+        <td>Draw</td>
+        <td>Fabric</td>
+        <td></td>
+        <td>Action</td>
+        <td></td>
+        <td>Brand Defaults</td>
+        <td>Sales Order No</td>
+        <td>Customer Ref No</td>
+    </tr>
+{% endmacro %}
+
+{% macro base_row(entity) %}
+    <tr>
+        <td rowspan="4" class="text-center td-large">{{ entity.qty }}</td>
+        <td rowspan="2" class="text-center td-large">{{ entity.baseWidth }}</td>
+        <td rowspan="2" width="30" class="text-center">X</td>
+        <td rowspan="2" class="text-center td-large">{{ entity.baseLength }}</td>
+        <td rowspan="4" class="text-center td-large">{{ entity.base }}</td>
+        <td class="td-label">BASE CONFIG</td>
+        <td>{{ entity.baseDepth}} deep</td>
+        <td class="td-label">NO OF DRAWS</td>
+        <td>{{ entity.drawerConfig }}</td>
+        <td rowspan="3" class="td-large text-center"></td>
+        <td class="td-label">TYPE</td>
+        <td>{{ entity.bedAction }}</td>
+        <td class="td-label">FEET</td>
+        <td>{{ entity.feet }}</td>
+        <td>1234</td>
+        <td class="text-center td-large" rowspan="3">23689</td>
+    </tr>
+    <tr>
+
+        <td class="td-label">UPGRADE</td>
+        <td>{{ entity.baseConfig }}</td>
+        <td class="td-label">CONFIG</td>
+        <td>{{ entity.drawerConfig }}</td>
+        <td class="td-label">UPGRADE</td>
+        <td></td>
+        <td class="td-label">BADGE</td>
+        <td>{{ entity.badge }}</td>
+        <td>ITEMS: 10</td>
+    </tr>
+    <tr>
+        <td colspan="3" rowspan="2" class="{% if entity.baseLength != "6ft6" %}invert{% endif %} text-center td-large">{% if entity.baseLength != "6ft6" %}SPECIAL SIZE{% endif %}</td>
+
+        <td class="td-label">COMMENTS</td>
+        <td>{{ entity.comment }}</td>
+        <td class="td-label">OTHER</td>
+        <td></td>
+        <td class="td-label">HANDSET</td>
+        <td>{{ entity.handset }}</td>
+        <td class="td-label">END BAR</td>
+        <td>{{ entity.endBar }}</td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td colspan="10" class="text-center td-large">{{ barcode({code: 'string to encode', type: 'c128', format: 'html'}) }}787878978970898</td>
+        <td class="text-center td-medium">PAGE: 10</td>
+    </tr>
+{% endmacro base_row %}
+
+{% macro headboard_row(entity) %}
+    <tr class="headboard-row">
+        <td class="text-center">1</td>
+        <td class="td-label">SIZE</td>
+        <td class="text-center td-medium">{{ entity.baseWidth }}</td>
+        <td class="td-label">HB MODEL</td>
+        <td class="text-center td-medium" colspan="4">{{ entity.headboard }} ({{ entity.headboardType }})</td>
+        <td class="td-label">FABRIC</td>
+        <td class="td-large text-center"></td>
+        <td class="td-label td-medium">COMMENTS</td>
+        <td colspan="3" class="text-center td-medium">{{ entity.headboardComment }}</td>
+        <td class="text-center td-large">1234</td>
+        <td class="text-center td-medium">23689</td>
+    </tr>
+{% endmacro headboard_row %}

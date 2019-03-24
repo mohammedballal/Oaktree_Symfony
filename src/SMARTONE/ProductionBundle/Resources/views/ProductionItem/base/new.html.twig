@@ -1,0 +1,84 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'SMARTONEProductionBundle:ProductionItem:form/form_layout.html.twig' %}
+
+{% block body -%}
+
+    <style>
+        .production-form table {
+            width: 100%;
+        }
+        .production-form td {
+            padding: 3px;
+        }
+    </style>
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="pull-right" style="margin-top: -10px; margin-right: -20px;">
+                            {% if delete_form is defined %}
+                                {{ form(delete_form) }}
+                            {% endif %}
+                        </div>
+                        <h2>Production / Add</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a class="btn btn-success btn-block">Add Base</a><br>
+                                <a class="btn btn-info btn-block">Add Mattress <i class="material-icons pull-right"></i></a><br>
+                                <a class="btn btn-info btn-block">Add Headboard <i class="material-icons pull-right"></i></a><br>
+                                <a class="btn btn-info btn-block">Add Mattress Cover <i class="material-icons pull-right"></i></a><br>
+                                <a class="btn btn-info btn-block">Add Bedstead <i class="material-icons pull-right"></i></a><br>
+                                <a class="btn btn-info btn-block">Add Bed Action <i class="material-icons pull-right"></i></a>
+                            </div>
+
+                            <div class="col-md-10 production-form">
+                                {{ form_start(form) }}
+                                <div class="box-body" style="padding-bottom: 40px;">
+                                    {#{% for child in form.children %}#}
+                                        {#{% if child.vars.name != 'submit' %}#}
+                                            {#{{ form_widget(child) }}#}
+                                        {#{% endif %}#}
+                                    {#{% endfor %}#}
+
+                                    <table>
+                                        <tr>
+                                            <td>{{ form_widget(form.baseCode) }}</td>
+                                            <td>{{ form_widget(form.baseType) }}</td>
+                                            <td>{{ form_widget(form.width) }}</td>
+                                            <td>{{ form_widget(form.length) }}</td>
+                                            <td>{{ form_widget(form.depth) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ form_widget(form.baseUpgrade) }}</td>
+                                            <td>{{ form_widget(form.isDrawer) }}</td>
+                                            <td>{{ form_widget(form.noOfDrawers) }}</td>
+                                            <td>{{ form_widget(form.drawerConfig) }}</td>
+                                            <td>{{ form_widget(form.baseUpgrade) }}</td>
+                                            <td>{{ form_widget(form.baseUpgrade) }}</td>
+                                            <td>{{ form_widget(form.baseUpgrade) }}</td>
+                                        </tr>
+                                    </table>
+
+
+
+                                </div>
+                                <div class="dker p-a text-right">
+                                {{ form_widget(form.submit) }}
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

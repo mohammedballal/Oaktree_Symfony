@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {{ parent() }} My Profile | View
+{% endblock %}
+{% block body %}
+
+    <div class="p-a white lt box-shadow ng-scope">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="m-b-0 _300 ng-binding">Profile</h4>
+                <div class="box-tool" style="margin-top: -15px;">
+                    <a href="{{ path('dashboard') }}" class="btn-sm btn btn-info">Go to Dashboard</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>My Profile</h2>
+                    </div>
+                    <div class="box-body">
+                        {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,140 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ProductionItemBase</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Qty</th>
+                <td>{{ entity.qty }}</td>
+            </tr>
+            <tr>
+                <th>Basename</th>
+                <td>{{ entity.baseName }}</td>
+            </tr>
+            <tr>
+                <th>Headboard</th>
+                <td>{{ entity.headboard }}</td>
+            </tr>
+            <tr>
+                <th>Headboardsize</th>
+                <td>{{ entity.headboardSize }}</td>
+            </tr>
+            <tr>
+                <th>Headboardstyle</th>
+                <td>{{ entity.headboardStyle }}</td>
+            </tr>
+            <tr>
+                <th>Headboardcomment</th>
+                <td>{{ entity.headboardComment }}</td>
+            </tr>
+            <tr>
+                <th>Headboardcolour</th>
+                <td>{{ entity.headboardColour }}</td>
+            </tr>
+            <tr>
+                <th>Headboardfixing</th>
+                <td>{{ entity.headboardFixing }}</td>
+            </tr>
+            <tr>
+                <th>Basecode</th>
+                <td>{{ entity.baseCode }}</td>
+            </tr>
+            <tr>
+                <th>Width</th>
+                <td>{{ entity.width }}</td>
+            </tr>
+            <tr>
+                <th>Length</th>
+                <td>{{ entity.length }}</td>
+            </tr>
+            <tr>
+                <th>Depth</th>
+                <td>{{ entity.depth }}</td>
+            </tr>
+            <tr>
+                <th>Baseupgrade</th>
+                <td>{{ entity.baseUpgrade }}</td>
+            </tr>
+            <tr>
+                <th>Basetype</th>
+                <td>{{ entity.baseType }}</td>
+            </tr>
+            <tr>
+                <th>Basecomment</th>
+                <td>{{ entity.baseComment }}</td>
+            </tr>
+            <tr>
+                <th>Noofdrawers</th>
+                <td>{{ entity.noOfDrawers }}</td>
+            </tr>
+            <tr>
+                <th>Drawerconfig</th>
+                <td>{{ entity.drawerConfig }}</td>
+            </tr>
+            <tr>
+                <th>Isdrawer</th>
+                <td>{{ entity.isDrawer }}</td>
+            </tr>
+            <tr>
+                <th>Isbedstead</th>
+                <td>{{ entity.isBedstead }}</td>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>{{ entity.action }}</td>
+            </tr>
+            <tr>
+                <th>Actiontype</th>
+                <td>{{ entity.actionType }}</td>
+            </tr>
+            <tr>
+                <th>Actionupgrade</th>
+                <td>{{ entity.actionUpgrade }}</td>
+            </tr>
+            <tr>
+                <th>Actionhandset</th>
+                <td>{{ entity.actionHandset }}</td>
+            </tr>
+            <tr>
+                <th>Fabriccolour</th>
+                <td>{{ entity.fabricColour }}</td>
+            </tr>
+            <tr>
+                <th>Endbar</th>
+                <td>{{ entity.endBar }}</td>
+            </tr>
+            <tr>
+                <th>Feet</th>
+                <td>{{ entity.feet }}</td>
+            </tr>
+            <tr>
+                <th>Badge</th>
+                <td>{{ entity.badge }}</td>
+            </tr>
+            <tr>
+                <th>Sortorder</th>
+                <td>{{ entity.sortOrder }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('productionitembase') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('productionitembase_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

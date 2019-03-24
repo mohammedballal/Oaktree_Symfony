@@ -1,0 +1,66 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<style>
+    td:first-child {
+        font-weight: bold;
+    }
+</style>
+
+<div class="row" style="margin-top: 5px;">
+    <div class="col-md-12">
+        <div class="box" style="margin-bottom: 0;">
+            <div class="box-body">
+                <style>
+                    .contact_details_div td:first-child {
+                        font-weight: bold;
+                    }
+
+                    td {
+                        font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+                    }
+                </style>
+
+                <div class="row " style="">
+                    <div class="col-md-4 contact_details_div">
+                        {#<table class="table table-condensed">#}
+                            {#<tbody>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">First Name:</td>#}
+                                {#<td class="datao"> {{ app.user.firstName }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Last Name:</td>#}
+                                {#<td class="datao"> {{ app.user.lastName }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Address:</td>#}
+                                {#<td class="datao"> {{ app.user.address }}#}
+                                {#<br>{{ app.user.city }}<br>{{ app.user.postcode }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Telephone:</td>#}
+                                {#<td class="datao"> {{ app.user.telephone }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Mobile:</td>#}
+                                {#<td class="datao"> {{ app.user.mobile }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Email:</td>#}
+                                {#<td class="datao"> {{ app.user.email }}</td>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<td class="tdhead">Username:</td>#}
+                                {#<td class="datao"> {{ app.user.username }}</td>#}
+                            {#</tr>#}
+                            {#</tbody>#}
+                        {#</table>#}
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

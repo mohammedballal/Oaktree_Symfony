@@ -1,0 +1,37 @@
+{% macro action_headers() %}
+    <tr class="thead">
+        <td>Qty</td>
+        <td>Size Width</td>
+        <td></td>
+        <td>Size Length</td>
+        <td>Action</td>
+        <td>Upgrade</td>
+        <td>Handset</td>
+        <td>Sales Order No</td>
+        <td>Customer Ref No</td>
+    </tr>
+{% endmacro action_headers %}
+
+{% macro action_row(entity) %}
+    <tr>
+        <td rowspan="4" class="text-center td-large">1</td>
+        <td rowspan="2" class="text-center">{{ entity.baseWidth }}</td>
+        <td rowspan="2" width="30" class="text-center">X</td>
+        <td rowspan="2" class="text-center">{{ entity.baseLength }}</td>
+        <td rowspan="4" class="text-center td-large">STANDARD ACTION</td>
+        <td rowspan="4" class="text-center td-large">SPLIT ACTION</td>
+        <td rowspan="4" class="text-center td-large">STANDARD HANDSET</td>
+        <td class="text-center td-large">1234</td>
+        <td class="text-center td-large" rowspan="3">23689</td>
+    </tr>
+    <tr>
+        <td rowspan="3" class="text-center td-large">mmm</td>
+    </tr>
+    <tr>
+        <td colspan="3" rowspan="2" class="invert text-center td-large">SPECIAL SIZE</td>
+
+    </tr>
+    <tr>
+        <td class="text-center td-medium">PAGE: 10</td>
+    </tr>
+{% endmacro action_row %}

@@ -1,0 +1,105 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Productionitembase list</h2>
+                </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Qty</th>
+                <th>Basename</th>
+                <th>Headboard</th>
+                <th>Headboardsize</th>
+                <th>Headboardstyle</th>
+                <th>Headboardcomment</th>
+                <th>Headboardcolour</th>
+                <th>Headboardfixing</th>
+                <th>Basecode</th>
+                <th>Width</th>
+                <th>Length</th>
+                <th>Depth</th>
+                <th>Baseupgrade</th>
+                <th>Basetype</th>
+                <th>Basecomment</th>
+                <th>Noofdrawers</th>
+                <th>Drawerconfig</th>
+                <th>Isdrawer</th>
+                <th>Isbedstead</th>
+                <th>Action</th>
+                <th>Actiontype</th>
+                <th>Actionupgrade</th>
+                <th>Actionhandset</th>
+                <th>Fabriccolour</th>
+                <th>Endbar</th>
+                <th>Feet</th>
+                <th>Badge</th>
+                <th>Sortorder</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('productionitembase_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.qty }}</td>
+                <td>{{ entity.baseName }}</td>
+                <td>{{ entity.headboard }}</td>
+                <td>{{ entity.headboardSize }}</td>
+                <td>{{ entity.headboardStyle }}</td>
+                <td>{{ entity.headboardComment }}</td>
+                <td>{{ entity.headboardColour }}</td>
+                <td>{{ entity.headboardFixing }}</td>
+                <td>{{ entity.baseCode }}</td>
+                <td>{{ entity.width }}</td>
+                <td>{{ entity.length }}</td>
+                <td>{{ entity.depth }}</td>
+                <td>{{ entity.baseUpgrade }}</td>
+                <td>{{ entity.baseType }}</td>
+                <td>{{ entity.baseComment }}</td>
+                <td>{{ entity.noOfDrawers }}</td>
+                <td>{{ entity.drawerConfig }}</td>
+                <td>{{ entity.isDrawer }}</td>
+                <td>{{ entity.isBedstead }}</td>
+                <td>{{ entity.action }}</td>
+                <td>{{ entity.actionType }}</td>
+                <td>{{ entity.actionUpgrade }}</td>
+                <td>{{ entity.actionHandset }}</td>
+                <td>{{ entity.fabricColour }}</td>
+                <td>{{ entity.endBar }}</td>
+                <td>{{ entity.feet }}</td>
+                <td>{{ entity.badge }}</td>
+                <td>{{ entity.sortOrder }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('productionitembase_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('productionitembase_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('productionitembase_new') }}">
+                        New Productionitembase
+                    </a>
+                </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Mattresscover list</h2>
+                </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Brand</th>
+                <th>Covercode</th>
+                <th>Covername</th>
+                <th>Size</th>
+                <th>Width</th>
+                <th>Length</th>
+                <th>Depth</th>
+                <th>Quilted</th>
+                <th>Covertype</th>
+                <th>Sortorder</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('mattresscover_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.brand }}</td>
+                <td>{{ entity.coverCode }}</td>
+                <td>{{ entity.coverName }}</td>
+                <td>{{ entity.size }}</td>
+                <td>{{ entity.width }}</td>
+                <td>{{ entity.length }}</td>
+                <td>{{ entity.depth }}</td>
+                <td>{{ entity.quilted }}</td>
+                <td>{{ entity.coverType }}</td>
+                <td>{{ entity.sortOrder }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('mattresscover_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('mattresscover_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('mattresscover_new') }}">
+                        New Mattresscover
+                    </a>
+                </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            {% if app.session.flashbag.peekAll|length > 0  %}
+                <div class="col-md-12">
+                    <div class="box">
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="alert bg-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="pull-right" style="margin-top: -10px; margin-right: -20px;">
+                            {% if delete_form is defined %}
+                                {{ form(delete_form) }}
+                            {% endif %}
+                        </div>
+                        <h2>Customer</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    {{ form_start(form) }}
+                    <div class="box-body" style="padding-bottom: 40px;">
+                        {% for child in form.children %}
+                            {% if child.vars.name != 'submit' %}
+                                {{ form_row(child) }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="dker p-a text-right">
+                        <a href="{{ path('customer') }}" class="btn btn-default">Back</a>
+                        {{ form_widget(form.submit) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

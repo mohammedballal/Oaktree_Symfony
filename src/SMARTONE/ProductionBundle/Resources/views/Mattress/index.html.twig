@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Mattress list</h2>
+                </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Mattressmodel</th>
+                <th>Mattesdepth</th>
+                <th>Covertype</th>
+                <th>Mattressstyle</th>
+                <th>Mattressquiltdesign</th>
+                <th>Massageavailable</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            {% if category.mattress|length > 0 %}
+        <tr>
+            <td colspan="7" style="font-weight:bold; font-size: 20px !important; background-color: #636363; color: #ffffff;">{{ category }}</td>
+        </tr>
+            {% set type = null %}
+        {% for entity in category.mattress %}
+            {% if type != entity.mattressType %}
+                <tr>
+                    <td colspan="7" style="font-size: 15px; font-weight: bold;">&nbsp;&nbsp;&nbsp;{{ entity.mattressType }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;{{ entity.mattressModel }}</td>
+                <td>{{ entity.mattesDepth }}</td>
+                <td>{{ entity.coverType }}</td>
+                <td>{{ entity.mattressStyle }}</td>
+                <td>{{ entity.mattressQuiltDesign }}</td>
+                <td>{{ entity.massageAvailable }}</td>
+
+                <td align="right">
+                    <a class="btn btn-info btn-xs" href="{{ path('mattress_edit', { 'id': entity.id }) }}">Edit</a>
+                    <a class="btn btn-info btn-xs" href="{{ path('mattress_copy', { 'id': entity.id }) }}">Copy</a>
+                </td>
+            </tr>
+            {% set type = entity.mattressType %}
+        {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('mattress_new') }}">
+                        New Mattress
+                    </a>
+                </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

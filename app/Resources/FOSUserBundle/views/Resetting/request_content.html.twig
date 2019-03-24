@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+
+<div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+    <div class="m-b">
+        Forgot your password?
+        <p class="text-xs m-t">Enter your {{ 'resetting.request.username'|trans }} below and we will send you instructions on how to change your password.</p>
+    </div>
+
+    <form class="panel-body wrapper-lg" ui-jp="parsley" novalidate action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+        <div class="md-form-group">
+
+            <input type="text" class="md-input" id="username" name="username" required="required" />
+            {% if invalid_username is defined %}
+                <span class="help-block m-b-none">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</span>
+            {% endif %}
+            <label>{{ 'resetting.request.username'|trans }}</label>
+        </div>
+        <div>
+            <input class="btn primary btn-block p-x-md" type="submit" value="{{ 'resetting.request.submit'|trans }}" />
+        </div>
+
+    </form>
+</div>
+
+<div class="p-v-lg text-center">Return to <a href="{{ path('fos_user_security_login') }}" class="text-primary _600">Sign in</a></div>

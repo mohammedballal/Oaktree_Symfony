@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>{{ entity.courierName }}</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    <div class="dker p-a text-right">
+                        <a href="{{ path('courier') }}" class="btn btn-default">Back</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

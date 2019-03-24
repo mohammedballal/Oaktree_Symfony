@@ -1,0 +1,222 @@
+<html>
+<head>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FFF;
+            font: 10pt "\"Arial\"";
+            overflow-x: hidden;
+        }
+        .table {
+            width: 100%;
+        }
+        .page {
+
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+
+        }
+        .text-right {
+            text-align: right;
+        }
+        tr {
+            page-break-inside: avoid;
+        }
+        .divv {
+            padding-top: 20px !important;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .header {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .space {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            background-color: #f5f5f5;
+        }
+        .inventory td  {
+            border: 1px #5d5d5d solid;
+            padding: 5px;
+            font-size: 10px;
+        }
+
+        .inventory th {
+            background-color: black;
+            color: white;
+            border-bottom: 2px #ccc solid;
+            font-size: 11px;
+
+            padding: 5px;
+        }
+        .address {
+            font-size: 10px;
+        }
+        .no-border {
+            border: 0px !important;
+        }
+
+        .td-grey {
+            background-color: #cdcdcd;
+            font-size: 20px;
+        }
+
+
+        @page {
+
+            margin: 0;
+        }
+        @media print {
+            .page {
+                margin: 20px 0 0 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+    <div class="divv">
+        <table class="table">
+            <tr>
+                <td width="40%">
+                    <div>
+                        <img src="{{ base_dir ~ asset('images/bodyease.png') }}" height="100" style="margin: 0;padding: 0;">
+                    </div>
+                    <br>
+                </td>
+                <td align="center" width="20%" style="font-size: 30px; font-weight: bold;">MANIFEST REPORT</td>
+                <td width="40">
+                    <div style="width: 100%; border-radius: 2px; padding: 5px 35px 5px 5px; text-align: right"><span style="font-size: 11px; color:#000000;">
+                            Savile Business Centre <br>
+                Mill Street East<br>
+                Dewsbury<br>
+                WF12 9AH<br>
+                Tel: 0800 046 9901<br>
+                        sales@bodyease.co.uk</span></div>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="table inventory">
+            <tr>
+                <td width="230" class="td-grey">Brand Name:</td>
+                <td style="font-size: 16px;">{{ entity.brand }}</td>
+                <td align="center">
+                {% if entity.brand == 'Oaktree' %}
+                <img src="{{ base_dir ~ asset('images/oaktree.png') }}" height="35" style="margin: 0;padding: 0;">
+                {% elseif entity.brand == 'Middleton' %}
+                    <img src="{{ base_dir ~ asset('images/middleton.png') }}" height="35" style="margin: 0;padding: 0;">
+                {%endif  %}
+            </td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Our Document No:</td>
+                <td style="font-size: 16px;">{{ entity.docNo }}</td>
+                <td>{% if entity.docNo %}
+                    {{ barcode({code: entity.docNo, type: 'c128', format: 'html'}) }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Delivery To:</td>
+                <td style="font-size: 16px;" colspan="2">{{ entity.orderAddress }}</td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Date:</td>
+                <td style="font-size: 16px;" colspan="2">{% if entity.deliveryScheduleDay %}{{ entity.deliveryScheduleDay|date('l') }} {{ entity.deliveryScheduleDay|date('d/m/Y') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Time:</td>
+                <td style="font-size: 16px;" colspan="2">{{ entity.time }}</td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Booking Ref No:</td>
+                <td style="font-size: 16px;" colspan="2">{{ entity.bookingRef }}</td>
+            </tr>
+            <tr>
+                <td width="230" class="td-grey">Vehicle Reg No:</td>
+                <td style="font-size: 16px;" colspan="2">{{ entity.vehicleReg }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <style>
+        .isBundle td {
+            background-color: #EEEEEE !important;
+            border: 0;
+            font-style: italic !important;
+            font-size: 8px;
+        }
+        .bundle td {
+            background-color: #EEEEEE !important;
+            text-decoration: underline;
+        }
+    </style>
+
+
+    <div class="divv">
+        <table class="table inventory" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th style="text-align: center;" width="50">LINE NO</th>
+                <th colspan="2" style="text-align: left;" width="180">ORDER NO</th>
+                {#<th style="text-align: left;" width="300">ORDER NO BARCODE</th>#}
+                <th style="text-align: left;" width="100">ORDER RECEIVED</th>
+                <th width="150">NO. OF PIECES</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in entity.saleOrder %}
+                <tr>
+                    <td align="center">{{ loop.index }}</td>
+                    <td colspan="2">{{ order.orderNo }}{{  order.comments ? ' - [' ~ order.comments ~ ']' : '' }}</td>
+                    {#<td>{{ barcode({code: order.orderNo, type: 'c128', format: 'html'}) }}</td>#}
+                    <td>{% if order.orderReceiveDate %}{{ order.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                    <td align="center" style="font-weight: bold;">{{ order.items }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="foot-top">
+                <td colspan="2" style="background-color: black; color: white; font-size: 20px;">NOTES</td>
+                <td align="right" colspan="2" style="background-color: black; color: white; font-size: 20px;">TOTAL NO OF PIECES</td>
+                <td align="center" style="background-color: #cdcdcd; font-size: 20px;">{{ entity.totalItems }}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2" style="vertical-align: bottom; font-size: 8px; border-right: 0;">1</td>
+                <td align="right" style="font-size: 20px; border-left: 0;">SIGNATURE</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="vertical-align: bottom; font-size: 8px; border-right: 0;">2</td>
+                <td colspan="1" align="right" style=" font-size: 20px; border-left: 0;">PRINT NAME:</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="vertical-align: bottom; font-size: 8px; border-right: 0;">3</td>
+                <td colspan="1" align="right" style=" font-size: 20px; border-left: 0;">DATE:</td>
+                <td colspan="2"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'SMARTONEProductionBundle:ProductionItem:form/form_layout.html.twig' %}
+
+{% block body -%}
+    <style>
+        h4, .switch-div {
+            padding-left: 10px !important;
+        }
+    </style>
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="pull-right" style="margin-top: -10px; margin-right: -20px;">
+                            {% if delete_form is defined %}
+                                {{ form(delete_form) }}
+                            {% endif %}
+                        </div>
+                        <h2>Production / Add</h2>
+                    </div>
+                    <div class="box-divider m-a-0"></div>
+                    {#{{ form_start(form) }}#}
+                    {#<div class="box-body" style="padding-bottom: 40px;">#}
+                    {#{{ form_row(form.qty) }}#}
+                    {#{{ form_row(form.mattress) }}#}
+                    {#{{ form_row(form.base) }}#}
+                    {#{{ form_row(form.headboard) }}#}
+                    {#{{ form_row(form.bedStead) }}#}
+                    {#{{ form_row(form.bedAction) }}#}
+                    {#{{ form_row(form.mattressCover) }}#}
+                    {#</div>#}
+                    {#<div class="dker p-a text-right">#}
+                    {#<a href="{{ path('productionitem') }}" class="btn btn-default">Back</a>#}
+                    {#{{ form_widget(form.submit) }}#}
+                    {#</div>#}
+                    {#{{ form_end(form) }}#}
+
+                    <div class="box-body">
+                        {{ form_start(form) }}
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row"
+                                         style="background-color: #f0f0f0; margin-top: 30px; padding: 10px;">
+                                        <h4>Brand</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.brand) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.qty) }}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row"
+                                         style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Mandatory Options</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.baseCategory) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.base) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.singleMattress) }}
+                                        </div>
+                                    </div>
+
+                                    <div id="man-options" class="row"
+                                         style="background-color: #f0f0f0; margin-top: 20px; padding: 10px; {% if not entity.base %}display:;{% endif %}">
+                                        <h4>Primary Options</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.baseWidth) }}
+                                            <span style="color: #ff0000;">Note: Standard length is 6ft6 to change length go to customise</span>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.fabricColour) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row"
+                                         style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Customise</h4>
+                                        <div class="switch-div">
+                                            <label class="ui-switch ui-switch-md info m-t-xs">
+                                                <input id="check-customise" type="checkbox">
+                                                <i></i>
+                                            </label>
+                                        </div>
+                                        <div id="div-customise" style="">
+                                            <div class="col-md-3">
+                                                {{ form_row(form.baseLength) }}
+                                                {{ form_row(form.baseDepth) }}
+                                                {{ form_row(form.baseConfig) }}
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                {{ form_row(form.splitBedAction) }}
+                                                {{ form_row(form.bedAction) }}
+                                                {{ form_row(form.handset) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form_row(form.customComment) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row"
+                                         style="background-color: #f0f0f0; margin-top: 30px; padding: 10px;">
+                                        <h4>Brand Defaults</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.feet) }}
+                                            {{ form_row(form.badge) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.endBar) }}
+                                        </div>
+                                    </div>
+
+                                    <div id="div-drawer" class="row"
+                                         style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Drawer Options</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.noDrawers) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.drawerConfig) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Comment</h4>
+                                        <div class="col-md-6">
+                                            {{ form_row(form.comment) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Add Mattress</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.mattress) }}
+                                            {{ form_row(form.isMassage) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.mattressCustomise) }}
+                                            {{ form_row(form.mattressFilling) }}
+                                            {{ form_row(form.mattressFabricColour) }}
+                                            {{ form_row(form.mattressComment) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Headboard Options</h4>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.headboard) }}
+                                            {{ form_row(form.headboardType) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form_row(form.headboardComment) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="background-color: #f0f0f0; margin-top: 20px; padding: 10px;">
+                                        <h4>Add Accessory</h4>
+                                        <div class="col-md-3">{{ form_row(form.accessoryQty) }}
+                                        </div>
+                                        <div class="col-md-3">{{ form_row(form.accessoryDescription) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</a>
+                            <button type="submit" class="btn btn-success p-x-md">Add Set</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#{% for child in form.children %}#}
+    {#{% if form.children|length / 2 <= loop.index0 %}#}
+    {#{{ form_row(child) }}#}
+    {#{% else %}#}
+    {#{{ form_row(child) }}#}
+    {#{% endif %}#}
+    {#{% endfor %}#}
+
+
+{% endblock %}
+
+        {% block javascripts %}
+            {{ parent() }}
+            <script>
+                $(function () {
+                    var $brand = $('#smartone_productionbundle_productionitem_brand');
+                    var $base = $('#smartone_productionbundle_productionitem_base');
+
+                    $brand.change(function() {
+                        $.ajax({
+                            url: '{{ path('preset_ajax') }}',
+                            type: 'GET',
+                            data: {id: $(this).val()},
+                            success: function (html) {
+
+                                $.each(html, function (k, v) {
+                                    if(v == 0) {
+                                        $('#smartone_productionbundle_productionitem_'+k).val(null).trigger('change');
+                                    } else {
+                                        $('#smartone_productionbundle_productionitem_'+k).val(v).trigger('change');
+                                    }
+                                });
+
+                            }
+                        });
+                    });
+
+                    $(document).on('change', '#smartone_productionbundle_productionitem_base', function() {
+                        $.ajax({
+                            url: '{{ path('base_ajax') }}',
+                            type: 'GET',
+                            data: {id: $(this).val()},
+                            success: function (html) {
+                                if(html.is_drawer) {
+                                    $('#div-drawer').slideDown();
+                                } else {
+                                    $('#div-drawer').slideUp();
+                                }
+                            }
+                        });
+                    });
+
+
+                    var $sport = $('#smartone_productionbundle_productionitem_baseCategory');
+// When sport gets selected ...
+                    $sport.change(function () {
+                        $('#smartone_productionbundle_productionitem_base').attr('disabled', 'disabled');
+                        $('#smartone_productionbundle_productionitem_baseWidth').attr('disabled', 'disabled');
+
+                        // ... retrieve the corresponding form.
+                        var $form = $(this).closest('form');
+                        // Simulate form data, but only include the selected sport value.
+                        var data = {};
+                        data[$sport.attr('name')] = $sport.val();
+                        // Submit data via AJAX to the form's action path.
+                        $.ajax({
+                            url: $form.attr('action'),
+                            type: $form.attr('method'),
+                            data: data,
+                            success: function (html) {
+                                // Replace current position field ...
+                                $('#smartone_productionbundle_productionitem_base').closest('.form-group').replaceWith(
+                                    // ... with the returned one from the AJAX response.
+                                    $(html).find('#smartone_productionbundle_productionitem_base').closest('.form-group')
+                                ).attr('disabled');
+
+                                $('#smartone_productionbundle_productionitem_baseWidth').closest('.form-group').replaceWith(
+                                    // ... with the returned one from the AJAX response.
+                                    $(html).find('#smartone_productionbundle_productionitem_baseWidth').closest('.form-group')
+                                ).attr('disabled');
+
+
+                                $('.c-select').select2();
+
+                                // Position field now displays the appropriate positions.
+                            }
+                        });
+                    });
+
+
+
+                    $('#check-customise').change(function () {
+                        if($(this).is(':checked')) {
+                            $('#div-customise').slideDown();
+                        } else {
+                            $('#div-customise').slideUp();
+                        }
+
+                    });
+
+                    $('.c-select').select2();
+                });
+            </script>
+        {% endblock %}

@@ -1,0 +1,7 @@
+{% for site in sites %}
+    cd /home/static/domains/{{ site }}/<br>
+    rm -rf public_html<br>
+    cp -R /root/stat/static/{{ site }}/ /home/static/domains/{{ site }}/public_html<br>
+{% endfor %}
+
+

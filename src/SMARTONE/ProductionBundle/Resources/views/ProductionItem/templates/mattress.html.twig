@@ -1,0 +1,70 @@
+{% macro mattress_headers() %}
+    <tr class="thead">
+        <td>Qty</td>
+        <td>Size Width</td>
+        <td></td>
+        <td>Size Length</td>
+        <td>Mattress Model</td>
+        <td>Mattress Config</td>
+        <td>Mattress Filling</td>
+        <td></td>
+        <td>Massage</td>
+        <td>Fabric</td>
+        <td colspan="2">Tufted/Quilted Design</td>
+        <td></td>
+        <td>Brand Defaults</td>
+        <td>Sales Order No</td>
+        <td>Customer Ref No</td>
+    </tr>
+{% endmacro %}
+
+{% macro mattress_row(entity) %}
+    <tr>
+        <td rowspan="4" class="text-center td-large">1</td>
+        <td rowspan="2" class="text-center td-large">{{ entity.baseWidth }}</td>
+        <td rowspan="2" width="30" class="text-center">X</td>
+        <td rowspan="2" class="text-center td-large">{{ entity.baseLength }}</td>
+        <td rowspan="4" class="text-center td-large">{{ entity.mattress }}</td>
+        <td class="td-label">MATTRESS TYPE</td>
+        <td>{{ entity.mattress.mattressType }}</td>
+        <td class="td-label">MATT CONFIG</td>
+        <td>{{ entity.mattressFilling }}</td>
+        <td rowspan="3" class="td-large text-center"></td>
+        <td class="td-label">MATTRESS STYLE</td>
+        <td>{{ entity.mattress.mattressStyle }}</td>
+        <td class="td-label">LABEL</td>
+        <td>{{ entity.mattress.mattressLabel }}</td>
+        <td>1234</td>
+        <td class="text-center td-large" rowspan="3">23689</td>
+    </tr>
+    <tr>
+
+        <td class="td-label">FIRMNESS</td>
+        <td>{{ entity.mattressFirmness }}</td>
+        <td class="td-label">MASSAGE</td>
+        <td>{{ entity.isMassage ? 'YES' : 'NO' }}</td>
+        <td class="td-label">QUILTED</td>
+        <td>{{ entity.mattress.mattressQuiltDesign }}</td>
+        <td class="td-label"></td>
+        <td></td>
+        <td>ITEMS: 10</td>
+    </tr>
+    <tr>
+        <td colspan="3" rowspan="2" class="invert text-center td-large">SPECIAL SIZE</td>
+
+        <td class="td-label">COMMENTS</td>
+        <td>{{ entity.mattressComment }}</td>
+        <td class="td-label">DEPTH</td>
+        <td>{{ entity.mattress.mattesDepth }}</td>
+        <td class="td-label">COVER TYPE</td>
+        <td>{{ entity.mattressFabricColour }}</td>
+        <td class="td-label"></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td colspan="10" class="text-center td-large">{{ barcode({code: 'string to encode', type: 'c128', format: 'html'}) }}808989089-0890-</td>
+        <td class="text-center td-medium">PAGE: 10</td>
+    </tr>
+{% endmacro mattress_row %}

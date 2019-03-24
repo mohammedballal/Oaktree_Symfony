@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Completed Orders</h2>
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-condensed table-striped">
+                            <tr>
+                                <th>Order No</th>
+                                <th>Order Receive Date</th>
+                                <th class="text-center">Delivery To</th>
+                                <th class="text-center">Delivery Schedule for Week Commencing</th>
+                                <th class="text-center">Day Schedule for Delivery</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+
+                            {% for entity in entities %}
+                                <tr>
+                                    <td colspan="5" style="background-color: {% if entity.brand == 'Oaktree' %}green{% else %}navy{% endif %}; font-weight: bold; color: #ffffff; font-size: 18px;">{{ entity.brand }} - {{ entity.docNo }}</td>
+                                    <td align="right" style="background-color: {% if entity.brand == 'Oaktree' %}green{% else %}navy{% endif %};">
+                                        <a href="{{ path('schedule_un_complete', {'id' : entity.id}) }}" class="btn btn-danger btn-sm">Mark As Un-Complete</a>
+                                    </td>
+                                </tr>
+
+                                {% for order in entity.saleOrder %}
+                                    <tr>
+                                        <td>{{ order.orderNo }}</td>
+                                        <td>{% if order.orderReceiveDate %}{{ order.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                                        {% if loop.index0 == 0 %}
+                                            <td align="center" rowspan="{{ entity.saleOrder|length }}" style="vertical-align: middle !important;">
+                                                {% if entity.orderAddress %}
+                                                    {{ entity.orderAddress|nl2br }}
+                                                {% endif %}
+                                            </td>
+                                            <td align="center" rowspan="{{ entity.saleOrder|length }}" style="vertical-align: middle !important;">
+                                                {% if entity.deliveryScheduleDate %}
+                                                    <a href="{{ path('schedule_week', {'id' : entity.id}) }}" style="font-size: 20px; color: green; border: 1px solid green; padding: 10px;">{{ entity.deliveryScheduleDate|date('d/m/Y') }}</a>
+                                                {% endif %}
+                                            </td>
+                                            <td align="center" rowspan="{{ entity.saleOrder|length }}" style="vertical-align: middle !important;">
+                                                {% if entity.deliveryScheduleDay %}
+                                                    <a href="{{ path('schedule_week', {'id' : entity.id}) }}" style="font-size: 20px; background-color: green; color: white; border: 1px solid green; padding: 10px; display: block;">{{ entity.deliveryScheduleDay|date('l') }}</a>
+                                                    {{ entity.deliveryScheduleDate|date('d/m/Y') }}
+                                                {% endif %}
+                                            </td>
+                                            <td align="center" rowspan="{{ entity.saleOrder|length }}" style="vertical-align: middle !important;">
+                                                {% if entity.webPath %}
+                                                    <a target="_blank" href="{{ asset(entity.webPath) }}" class="btn black btn-sm">View Manifest</a>
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn btn-default" href="{{ path('docorder') }}">
+                            Back
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

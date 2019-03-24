@@ -1,0 +1,43 @@
+smartone_order:
+    resource: "@SMARTONEOrderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_production:
+    resource: "@SMARTONEProductionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_sale:
+    resource: "@SMARTONESaleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_api:
+    resource: "@SMARTONEApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_report:
+    resource: "@SMARTONEReportBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_shipping:
+    resource: "@SMARTONEShippingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_home:
+    resource: "@SMARTONEHomeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+smartone_user:
+    resource: "@SMARTONEUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+

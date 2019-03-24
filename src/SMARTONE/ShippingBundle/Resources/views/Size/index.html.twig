@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Sizes list</h2>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="text-align: left;">Size Name</th>
+                            <th style="text-align: right;">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>{{ entity.sizeName }}</td>
+                                <td align="right">
+                                    <a class="btn btn-info btn-xs" href="{{ path('size_edit', { 'id': entity.id }) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn info" href="{{ path('size_new') }}">
+                            New Size
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

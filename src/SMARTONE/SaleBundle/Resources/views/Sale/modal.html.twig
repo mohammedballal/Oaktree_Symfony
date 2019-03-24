@@ -1,0 +1,32 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.dark.css') }}">
+
+<div class="modal-content">
+    <div class="modal-header bg-success">
+        <h5 class="modal-title">{{ title }}</h5>
+    </div>
+    {{ form_start(form) }}
+    <div class="modal-body p-lg">
+
+        {% for child in form.children %}
+            {% if child.vars.name != 'submit' %}
+                {{ form_row(child) }}
+            {% endif %}
+        {% endfor %}
+
+        <span class="red" style="font-size: 14px; padding: 3px">Click submit to {{ title|lower }}</span>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</a>
+        <button type="submit" class="btn btn-success p-x-md">Submit</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.datetimepicker').datetimepicker();
+    });
+</script>

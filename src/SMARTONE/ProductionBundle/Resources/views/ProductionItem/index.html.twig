@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Production list</h2>
+                    </div>
+
+                    <table class="table table-condensed records_list">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Qty</th>
+                            <th>Mattress</th>
+                            <th>Base</th>
+                            <th>Headboard</th>
+                            <th>Bedstead</th>
+                            <th>Bed Action</th>
+                            <th>Mattress Cover</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td><a href="{{ path('productionitem_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                <td>{{ entity.qty }}</td>
+                                <td>{{ entity.mattress }}</td>
+                                <td>{{ entity.base }}</td>
+                                <td>{{ entity.headboard }}</td>
+                                <td>{{ entity.bedStead }}</td>
+                                <td>{{ entity.bedAction }}</td>
+                                <td>{{ entity.mattressCover }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-xs" href="{{ path('productionitem_show', { 'id': entity.id }) }}">Show</a>
+                                    <a class="btn btn-info btn-xs" href="{{ path('productionitem_edit', { 'id': entity.id }) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn info" href="{{ path('productionitem_new') }}">
+                            New Production
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>MattressCover</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Covername</th>
+                <td>{{ entity.coverName }}</td>
+            </tr>
+            <tr>
+                <th>Width</th>
+                <td>{{ entity.width }}</td>
+            </tr>
+            <tr>
+                <th>Length</th>
+                <td>{{ entity.length }}</td>
+            </tr>
+            <tr>
+                <th>Depth</th>
+                <td>{{ entity.depth }}</td>
+            </tr>
+            <tr>
+                <th>Quilted</th>
+                <td>{{ entity.quilted }}</td>
+            </tr>
+            <tr>
+                <th>Covertype</th>
+                <td>{{ entity.coverType }}</td>
+            </tr>
+            <tr>
+                <th>Sortorder</th>
+                <td>{{ entity.sortOrder }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('mattresscover') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('mattresscover_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

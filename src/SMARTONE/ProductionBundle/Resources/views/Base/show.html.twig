@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Base</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Basetype</th>
+                <td>{{ entity.baseType }}</td>
+            </tr>
+            <tr>
+                <th>Nobases</th>
+                <td>{{ entity.noBases }}</td>
+            </tr>
+            <tr>
+                <th>Maxdrawers</th>
+                <td>{{ entity.maxDrawers }}</td>
+            </tr>
+            <tr>
+                <th>Isdrawer</th>
+                <td>{{ entity.isDrawer }}</td>
+            </tr>
+            <tr>
+                <th>Mattressinpack</th>
+                <td>{{ entity.mattressInPack }}</td>
+            </tr>
+            <tr>
+                <th>Actionincluded</th>
+                <td>{{ entity.actionIncluded }}</td>
+            </tr>
+            <tr>
+                <th>Noaction</th>
+                <td>{{ entity.noAction }}</td>
+            </tr>
+            <tr>
+                <th>Sortorder</th>
+                <td>{{ entity.sortOrder }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('base') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('base_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

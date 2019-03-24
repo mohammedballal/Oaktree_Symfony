@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Shipment</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Docno</th>
+                <td>{{ entity.docNo }}</td>
+            </tr>
+            <tr>
+                <th>Cusorderno</th>
+                <td>{{ entity.cusOrderNo }}</td>
+            </tr>
+            <tr>
+                <th>Orderreceivedate</th>
+                <td>{{ entity.orderReceiveDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Inproduction</th>
+                <td>{{ entity.inProduction }}</td>
+            </tr>
+            <tr>
+                <th>Shippeddate</th>
+                <td>{{ entity.shippedDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Orderreceived</th>
+                <td>{{ entity.orderReceived }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('shipment') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('shipment_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

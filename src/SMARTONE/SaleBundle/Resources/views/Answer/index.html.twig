@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h2>Answer list</h2>
+                    </div>
+
+                    <table class="records_list table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="text-align: left; width: 10%;">Number</th>
+                            <th style="text-align: left;">Answer</th>
+                            <th style="text-align: left;">Category</th>
+                            <th style="text-align: right;">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>{{ entity.number }}</td>
+                                <td>{{ entity.text|raw }}</td>
+                                <td>{{ entity.typeText }}</td>
+                                <td align="right">
+                                    <a class="btn btn-info btn-xs" href="{{ path('answer_edit', { 'id': entity.id }) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="dker p-a text-right">
+                        <a ui-sref="app.widget" class="btn btn-info answer" href="{{ path('answer_new') }}">
+                            New Answer
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends '::base.html.twig' %}
+
+{% import "@SMARTONEProduction/ProductionItem/templates/base.html.twig" as base %}
+{% import "@SMARTONEProduction/ProductionItem/templates/mattress.html.twig" as mattress %}
+{% import "@SMARTONEProduction/ProductionItem/templates/action.html.twig" as action %}
+{% import "@SMARTONEProduction/ProductionItem/templates/cover.html.twig" as cover %}
+{% import "@SMARTONEProduction/ProductionItem/templates/table.html.twig" as table %}
+
+{% block body -%}
+
+    <style>
+        .thead td {
+            background-color: grey;
+            color: #ffffff !important;
+            font-weight: bold;
+            padding-left: 5px !important;
+        }
+        td {
+            border: 1px #000000 solid !important;
+            text-align: left;
+            vertical-align: middle !important;
+            font-size: 10px;
+            padding: 2px !important;
+        }
+        td.td-large {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        td.td-medium {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        td.invert {
+            background-color: #d6d6d6;
+        }
+        td.td-label {
+            font-size: 8px;
+            text-align: right;
+            font-weight: bold;
+        }
+        td.no-border {
+            border: 0 !important;
+        }
+        .headboard-row td {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+
+        }
+        .headboard-row td:not(:last-child) {
+            border-right-color: #ffffff !important;
+        }
+    </style>
+
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3>Base</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        {{ base.base_headers() }}
+                        {{ table.table_space(16) }}
+                        {{ base.base_row(entity) }}
+                        {{ base.headboard_row(entity) }}
+                        {{ table.table_space(16) }}
+                        {{ base.base_row(entity) }}
+                    </table>
+                </div>
+
+                <div class="box-header">
+                    <h3>Mattress</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        {{ mattress.mattress_headers() }}
+                        {{ table.table_space(16) }}
+                        {{ mattress.mattress_row(entity) }}
+                    </table>
+                </div>
+
+                <div class="box-header">
+                    <h3>Headboard</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        {{ base.headboard_row(entity) }}
+                        {{ table.table_space(16) }}
+                        {{ base.headboard_row(entity) }}
+                        {{ table.table_space(16) }}
+                        {{ base.headboard_row(entity) }}
+                        {{ table.table_space(16) }}
+                        {{ base.headboard_row(entity) }}
+                    </table>
+                </div>
+
+                <div class="box-header">
+                    <h3>Action</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        {{ action.action_headers() }}
+                        {{ table.table_space(16) }}
+                        {{ action.action_row(entity) }}
+                        {{ table.table_space(16) }}
+                    </table>
+                </div>
+
+                <div class="box-header">
+                    <h3>Cover</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        {{ cover.cover_headers() }}
+                        {{ table.table_space(16) }}
+                        {{ cover.cover_row(entity) }}
+                        {{ table.table_space(16) }}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('productionitem') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('productionitem_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
+
+
+

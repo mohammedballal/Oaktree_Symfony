@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Presetfabriccolour list</h2>
+                </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Brand</th>
+                <th>Colours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('presetfabriccolour_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.brand }}</td>
+                <td>{% for colour in entity.fabricColour %}{{ colour }}; {% endfor %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('presetfabriccolour_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('presetfabriccolour_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('presetfabriccolour_new') }}">
+                        New Presetfabriccolour
+                    </a>
+                </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

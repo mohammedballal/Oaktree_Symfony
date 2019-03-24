@@ -1,0 +1,122 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+    </style>
+<div class="padding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Orders Cancelled / On Hold</h2>
+                </div>
+
+                <div class="-body">
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Order No</th>
+                <th>Order Receive Date</th>
+                <th>Brand</th>
+                <th>Comments</th>
+                <th>Cancel Comments</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="7" style="background-color: green; font-weight: bold; color: #ffffff; font-size: 18px;">Oaktree - On-Hold</td>
+        </tr>
+        {% for entity in oakHold %}
+            <tr>
+                <td>{{ entity.orderNo }}</td>
+                <td>{% if entity.orderReceiveDate %}{{ entity.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.brand }}</td>
+                <td>{{ entity.comments }}</td>
+                <td>{{ entity.cancelComment }}</td>
+                <td align="right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-xs btn-info" href="{{ path('order_edit', { 'id': entity.id }) }}">Edit</a>
+                    <a class="btn btn-xs btn-warning" href="{{ path('hold_order_edit', { 'id': entity.id, 'type' : 1 }) }}">Un-hold</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="7" style="background-color: navy; font-weight: bold; color: #ffffff; font-size: 18px;">Middleton - On Hold</td>
+        </tr>
+        {% for entity in middleHold %}
+            <tr>
+                <td>{{ entity.orderNo }}</td>
+                <td>{% if entity.orderReceiveDate %}{{ entity.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.brand }}</td>
+                <td>{{ entity.comments }}</td>
+                <td>{{ entity.cancelComment }}</td>
+                <td align="right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-xs btn-info" href="{{ path('order_edit', { 'id': entity.id, 'type' : 1 }) }}">Edit</a>
+                    <a class="btn btn-xs btn-warning" href="{{ path('hold_order_edit', { 'id': entity.id, 'type' : 1 }) }}">Un-hold</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="7" style="background-color: green; font-weight: bold; color: #ffffff; font-size: 18px;">Oaktree - Cancelled</td>
+        </tr>
+        {% for entity in oakCancelled %}
+            <tr>
+                <td>{{ entity.orderNo }}</td>
+                <td>{% if entity.orderReceiveDate %}{{ entity.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.brand }}</td>
+                <td>{{ entity.comments }}</td>
+                <td>{{ entity.cancelComment }}</td>
+                <td align="right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-xs btn-info" href="{{ path('order_edit', { 'id': entity.id }) }}">Edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="7" style="background-color: navy; font-weight: bold; color: #ffffff; font-size: 18px;">Middleton - Cancelled</td>
+        </tr>
+        {% for entity in middleCancelled %}
+            <tr>
+                <td>{{ entity.orderNo }}</td>
+                <td>{% if entity.orderReceiveDate %}{{ entity.orderReceiveDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.brand }}</td>
+                <td>{{ entity.comments }}</td>
+                <td>{{ entity.cancelComment }}</td>
+                <td align="right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-xs btn-info" href="{{ path('order_edit', { 'id': entity.id }) }}">Edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="dker p-a text-right">
+                    <a ui-sref="app.widget" class="btn info" href="{{ path('order_new') }}">
+                        New Order
+                    </a>
+                </div>
+                {% endif %}
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

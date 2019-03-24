@@ -1,0 +1,133 @@
+<html>
+<head>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FFF;
+            font: 12pt "Tahoma";
+            overflow-x: hidden;
+        }
+        .page {
+            width: 10cm;
+            height: 15cm;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+
+        }
+        .address {
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            width: 100%;
+            margin: 100px 0 0 0;
+            padding: 20px 0 20px 20px;
+        }
+        .SKU {
+
+            padding: 10px 0 20px 20px;
+            border-bottom: 2px solid #000;
+            width: 100%;
+            font-size: 8px;
+        }
+        .SKU table {
+            font-size: 8px;
+        }
+        .return{
+            font-size: 8px;
+            padding: 20px 0 0 20px;
+            width: 40%;
+        }
+        .label table {
+            width: 100%;
+
+        }
+        .label td {
+            text-align: center;
+
+            vertical-align: middle !important;
+        }
+        .label tr:first-child td:first-child {
+            height: 180px;
+            background-color: black;
+            color: white;
+        }
+        .label tr:nth-child(3) td {
+
+        }
+
+        .label tr:nth-child(4) td {
+            border: 1px solid #000000;
+            height: 210px;
+        }
+
+        @page {
+            size: 10cm 15cm;
+            margin: 0;
+        }
+        @media print {
+            .page {
+                margin: 20px 0 0 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% for order in entity.saleOrder %}
+    {% if order.items %}
+    {% for i in 1..order.items %}
+<div class="page">
+    <div class="label" style="padding: 10px;">
+   <table cellpadding="0" cellspacing="0">
+       <tr>
+           <td>ORDER NO</td>
+           <td colspan="2" style="border: 0;">
+               <div style="font-size: 10px; margin-top: -80px; margin-bottom: 60px;">{{ order.comments }}</div>
+               PO {{ order.orderNo }}
+           </td>
+       </tr>
+
+       <tr>
+           <td style="font-size: 14px; background-color: black; color: white"><span style="font-size: 10px;">Internal Doc No.</span><br>{{ entity.docNo }}</td>
+           <td style="font-size: 14px; background-color: black; color: white">{% if entity.deliveryScheduleDay %}{{ entity.deliveryScheduleDay|date('l') }}{% endif %}</td>
+           <td style="font-size: 14px; background-color: black; color: white">{% if entity.deliveryScheduleDay %}{{ entity.deliveryScheduleDay|date('d/m/Y') }}{% endif %}</td>
+       </tr>
+       <tr>
+           <td>Item</td>
+           <td></td>
+           <td>Total Items</td>
+       </tr>
+       <tr>
+           <td width="50%" style="font-size: 50px; font-weight: bold;">{{ i }}</td>
+           <td>OF</td>
+           <td width="50%" style="font-size: 50px; font-weight: bold">{{ order.items }}</td>
+       </tr>
+       <tr>
+           <td colspan="3" align="center" style="background-color: black; color: white; font-size: 20px;">
+               {{ entity.brand }}
+           </td></tr>
+       <tr>
+           <td colspan="3" align="center">
+               <div style="margin-top: 10px;">
+                   {{ order.orderNo }}
+                   {{ barcode({code: order.orderNo, height: 40, type: 'c128', format: 'html'}) }}</div>
+           </td>
+       </tr>
+   </table>
+    </div>
+</div>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>
